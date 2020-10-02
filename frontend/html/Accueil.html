@@ -7,6 +7,7 @@
         <link rel="shortcut icon" type="image/png" href="../public/image/fav-icone.PNG">
         <title>Orinoco</title>
         <script src="https://kit.fontawesome.com/b5c0077aa8.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="../js/nav.js" defer ></script>
     </head>
     <body>
         <header>
@@ -14,18 +15,48 @@
             <h1>Orinoco</h1>
         </header>
         <nav>
-            <div>
-                <a href="x">Accueil</a>
-                <a href="x">Panier</a>
-                <a href="x">Mon Compte</a>
+            <div class="nav-flex">
+                <button>|||</button>
+                <div>
+                    <a href="x">Se Connecter</a>
+                    <a href="x">Créer Compte</a>
+                </div>
             </div>
-            <div>
-                <a href="x">Se Connecter</a>
-                <a href="x">Créer Compte</a>
-            </div>
+            <ul class="ul-hidden">
+                <li><a href="x">Accueil</a></li>
+                <li><a href="x">Panier</a></li>
+                <li><a href="x">Mon Compte</a></li>
+            </ul>
         </nav>
         <main>
-            
+            <section>
+                <h2>Les ours en peluche</h2>
+                <article>
+                    <div>
+                        <h3>Ours 1</h3>
+                    </div>
+                    <div>
+                        <h3>Ours 2</h3>
+                    </div>
+                    <div>
+                        <h3>Ours 3</h3>
+                    </div>
+                    <div>
+                        <h3>Ours 4</h3>
+                    </div>
+                </article>
+            </section>
+            <aside>
+                <h5>PUB</h5>
+                <div class="occitane">
+                    <h6>Occitane</h6>
+                    <img src="../public/image/Occitane-gif.gif" alt="Image animé d'Occitane" />
+                </div>
+                <div class="cocacola">
+                    <h6>Coca Cola</h6>
+                    <img src="../public/image/Cocacola-gif.gif"  alt="Image animé RedBull" />
+                </div>
+            </aside>
         </main>
     </body>
 </html>

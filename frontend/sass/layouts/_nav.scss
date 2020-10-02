@@ -1,0 +1,22 @@
+nav {
+    display: flex;
+    flex-direction: column;
+}
+nav .nav-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+nav a {
+    text-decoration: none;
+}
+nav .ul-hidden{
+    display: none;
+} 
+nav .ul-visible{
+    display: block;
+    padding-inline-start: 0%;
+}
+nav li {
+    list-style: none;
+}
