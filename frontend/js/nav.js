@@ -5,3 +5,15 @@ button.addEventListener("click", function() {
         ulHidden.classList.toggle("ul-visible")
     } 
 })
+
+let getTeddy = async function () {
+        let response = await fetch("http://localhost:3000/api/teddies")
+        if (response.ok) {  
+        let data = await response.json()
+        document.getElementById("teddy").innerHTML = data
+        } else {
+        alert("Serveur Indisponible!!")
+        }
+}
+
+getTeddy()
