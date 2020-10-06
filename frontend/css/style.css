@@ -16,8 +16,9 @@ header {
   align-items: center;
 }
 
-header i {
-  font-size: 50px;
+header img {
+  max-width: 15%;
+  max-height: 15%;
 }
 
 header h1 {
