@@ -67,6 +67,16 @@ section {
   width: 70%;
 }
 
+section li {
+  display: flex;
+  flex-direction: column;
+}
+
+section img {
+  width: 50%;
+  height: 50%;
+}
+
 aside {
   display: flex;
   flex-direction: column;
