@@ -36,8 +36,8 @@ let getTeddy = async function () {
             for (var i = 0; i < data.length; i++) {
                 let object = data[i]
                 let listLi = document.createElement('li')
-                listLi.appendChild(document.createElement("a")).textContent = object.name 
-                // .setAttribute("href", "./Produit.html") //tentative d'ajout href échouer
+                listLi.appendChild(document.createElement("a")).textContent = object.name  //.textContent = object.name 
+                //.setAttribute("href", "./Produit.html")
                 listLi.appendChild(document.createElement("img")).setAttribute("src", object.imageUrl)
                 listUl.appendChild(listLi)
             }
@@ -45,5 +45,10 @@ let getTeddy = async function () {
         alert("Serveur Indisponible!!")
     }
 }
-getTeddy() 
+getTeddy()
 
+/*
+let lien = document.querySelectorAll("ul .a")
+lien.setAttribute("href", "./Produit.html")
+console.log(lien)
+*/
