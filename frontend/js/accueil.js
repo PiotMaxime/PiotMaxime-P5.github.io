@@ -43,9 +43,7 @@ let getTeddy = async function () {
                 a.textContent = object.name
                 listLi.appendChild(a) 
                 //.setAttribute("href", "./Produit.html?id=".object._id)
-                let imageTeddy = document.createElement("img")
-                imageTeddy.setAttribute("src", object.imageUrl)
-                listLi.appendChild(imageTeddy)
+                listLi.appendChild(document.createElement("img")).setAttribute("src", object.imageUrl)
                 listUl.appendChild(listLi)
             }
         } else {
