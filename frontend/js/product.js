@@ -31,9 +31,13 @@ let getOneTeddy = async function () {
         infoTeddy.appendChild(descriTeddy)  // ajout de la description dans la section "info"
         infoTeddy.appendChild(divPrice)  // ajout de la div du prix dans la section "info"
         
-        // Début de la création de la liste avec tableau couleur
+        //Création d'un formulaire
+        let formTeddy = document.createElement("form") 
+
+        // -Début liste tableau
         let colors = data.colors 
         let selectColor = document.createElement("select")
+        selectColor.setAttribute("id", "colorSelected")  //la couleur sectionner
         let menuColor = document.createElement("h5")
         menuColor.textContent = "Choix de la Couleur"
         infoTeddy.appendChild(menuColor)
@@ -42,12 +46,34 @@ let getOneTeddy = async function () {
                 let optionColor = document.createElement("option")
                 optionColor.textContent = color
                 selectColor.appendChild(optionColor)
-                infoTeddy.appendChild(selectColor)
+                formTeddy.appendChild(selectColor)
             }
-        // Fin liste tableau
+        // -Fin liste tableau
 
+        
+        let divQuantity = document.createElement("div")
+        let labelQuantity = document.createElement("label")
+        labelQuantity.setAttribute("for", "numbersTeddy")
+        labelQuantity.textContent = "Quantité : "
+        let inputQuantity = document.createElement("input")
+        inputQuantity.setAttribute("id", "numbersTeddy") // le nombre de Teddy Choisi
+        inputQuantity.setAttribute("type", "number")
+        inputQuantity.setAttribute("min", "1")
+        inputQuantity.setAttribute("max", "20")
+        inputQuantity.setAttribute("value", "1")
+        divQuantity.appendChild(labelQuantity)
+        divQuantity.appendChild(inputQuantity)
+        formTeddy.appendChild(divQuantity)
+        let validateBuy = document.createElement("input")
+        validateBuy.setAttribute("type", "submit")
+        validateBuy.setAttribute("value", "Valider l'achat")
+        formTeddy.appendChild(validateBuy)
+        infoTeddy.appendChild(formTeddy)
+        //Fin du formulaire
+        console.log(data._id)
         } else {
         alert("Serveur Indisponible!!")
     }
 }
 getOneTeddy()
+
