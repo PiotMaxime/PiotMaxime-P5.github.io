@@ -65,12 +65,25 @@ let getOneTeddy = async function () {
         divQuantity.appendChild(inputQuantity)
         formTeddy.appendChild(divQuantity)
         let validateBuy = document.createElement("input")
-        validateBuy.setAttribute("type", "submit")
+        validateBuy.setAttribute("type", "button")
         validateBuy.setAttribute("value", "Valider l'achat")
         formTeddy.appendChild(validateBuy)
         infoTeddy.appendChild(formTeddy)
         //Fin du formulaire
-        console.log(data._id)
+        
+        // TEMPORAIRE
+        // localStorage.clear()
+        // console.log(localStorage)
+        // FIN TEMPORAIRE
+
+        validateBuy.addEventListener("click", function() {
+            localStorage.setItem("name", data.name)
+            localStorage.setItem("idBuy", data._id)
+            localStorage.setItem("price", data.price)
+            localStorage.setItem("colorSelect", selectColor.value) // j'ai teste plusieurs méthode et au final j'ai testé un truc qui je pensais que ne marcherai pas
+            localStorage.setItem("numbers", inputQuantity.value)
+            console.log(localStorage) // TEMPORAIRE
+            })
         } else {
         alert("Serveur Indisponible!!")
     }
