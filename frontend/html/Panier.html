@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="../css/style.css" />
         <link rel="shortcut icon" type="image/png" href="../public/image/fav-icone.PNG">
         <title>Orinoco</title>
-        <script type="text/javascript" src="../js/product.js" defer ></script>
+        <script type="text/javascript" src="../js/cart.js" defer ></script>
     </head>
     <body>
         <header>
@@ -34,6 +34,25 @@
                 <li><a href="x">Mon Compte</a></li>
             </ul>
         </nav>
-        <main></main>
+        <main class="cart">
+            <h2>Votre Panier</h2>
+            <section>
+                <h3>Vos Achats</h3>
+                <div id="listPurchase">
+                    <table>
+                        <tbody id="tablePurchase">
+                            <tr>
+                                <th>Nom du Produit</th>
+                                <th>ID</th>
+                                <th>Couleur choisie</th>
+                                <th>Quantité</th>
+                                <th>Prix à l'unité</th>
+                                <th>Prix total</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
     </body>
 </html>

@@ -64,6 +64,12 @@ main {
   justify-content: center;
 }
 
+.cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 section {
   display: flex;
   flex-direction: column;
@@ -94,6 +100,23 @@ aside {
 aside img {
   width: 80%;
   height: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#tablePurchase th {
+  background-color: #9F87CD;
+  padding: 5px;
+  border: 2px solid black;
+}
+
+#tablePurchase td {
+  background-color: #F7AC48;
+  padding: 5px;
+  border: 2px solid black;
 }
 
 /*# sourceMappingURL=style.css.map */

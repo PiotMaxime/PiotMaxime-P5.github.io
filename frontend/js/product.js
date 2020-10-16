@@ -72,11 +72,11 @@ let getOneTeddy = async function () {
         //Fin du formulaire
         
         // TEMPORAIRE
-        // localStorage.clear()
-        // console.log(localStorage)
+        //localStorage.clear()
+        //console.log(localStorage)
         // FIN TEMPORAIRE
 
-        validateBuy.addEventListener("click", function() {
+        /*validateBuy.addEventListener("click", function() {
             localStorage.setItem("name", data.name)
             localStorage.setItem("idBuy", data._id)
             localStorage.setItem("price", data.price)
@@ -84,6 +84,20 @@ let getOneTeddy = async function () {
             localStorage.setItem("numbers", inputQuantity.value)
             console.log(localStorage) // TEMPORAIRE
             })
+        */
+       validateBuy.addEventListener("click", function() {
+            let purchase = {
+                name: data.name,
+                _id: data._id,
+                price: data.price,
+                color: selectColor.value,
+                numbers: inputQuantity.value
+            }
+            localStorage.setItem(purchase.name, JSON.stringify(purchase))
+            console.log(localStorage);
+        })
+        
+            
         } else {
         alert("Serveur Indisponible!!")
     }
