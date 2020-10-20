@@ -11,17 +11,14 @@ button.addEventListener("click", function() {
 let tablePurchase = document.getElementById("tablePurchase")
 console.log(listPurchase)
 let getPurchase = function () {
-    let purchaseTeddys = [
-        JSON.parse(localStorage.getItem("Norbert")),
-        JSON.parse(localStorage.getItem("Arnold")),
-        JSON.parse(localStorage.getItem("Lenny and Carl")),
-        JSON.parse(localStorage.getItem("Gustav")),
-        JSON.parse(localStorage.getItem("Garfunkel"))
-    ]
+    let purchaseTeddys = []
+        for (var j = 0; j <localStorage.length; j++) {
+            let key = localStorage.key(j)
+            purchaseTeddys.push(JSON.parse(localStorage.getItem(key)))
+        }
     console.log(purchaseTeddys)// temporaire
+    //localStorage.clear()
 
-
-    try { 
         for (var i = 0; i < purchaseTeddys.length; i++){
             let oneTeddy = purchaseTeddys[i]
             let trPurchase = document.createElement("tr")
@@ -31,7 +28,7 @@ let getPurchase = function () {
             tdName.textContent = oneTeddy.name
             trPurchase.appendChild(tdName)
             // fin nom
-
+            
             // début id
             let tdId = document.createElement("td")
             tdId.textContent = oneTeddy._id
@@ -66,28 +63,42 @@ let getPurchase = function () {
             trPurchase.appendChild(tdPrice)
             // fin prix unitaire
             
-            // début prix total
+            // début prix total d'un teddy
             let tdTotalPrice = document.createElement("td")
+            let symboleTotalPrice = document.createElement("span")
+            let totalPrice = document.createElement("span")
             let stringPrice = price.textContent
-            console.log(stringPrice)
-            console.log(inputQuantity.value)
-            
             let calcul = stringPrice * inputQuantity.value
-            console.log(calcul)
-            tdTotalPrice.textContent = calcul
+            totalPrice.textContent = calcul
+            symboleTotalPrice.textContent = " €"
+            tdTotalPrice.appendChild(totalPrice)
+            tdTotalPrice.appendChild(symboleTotalPrice)
             trPurchase.appendChild(tdTotalPrice)
+            // fin prix total d'un teddy
+
             /*
-            let pTest = document.createElement('p')
-            pTest.textContent = oneTeddy.name
-            listPurchase.appendChild(pTest)
+            let stringTotalPrice = totalPrice.textContent
+            console.log(stringTotalPrice)
             */
 
             tablePurchase.appendChild(trPurchase)
+            
+            //changement de number du localStorage quand le client modifie la valeur
+            inputQuantity.addEventListener("change", function () {
+                let teddys = {
+                    name: oneTeddy.name,
+                    _id: oneTeddy._id,
+                    price: oneTeddy.price,
+                    color: oneTeddy.color,
+                    numbers: inputQuantity.value
+                }
+                localStorage.setItem(teddys.name, JSON.stringify(teddys))
+                // trouver une solution pour le calcul dynamique après le changement de la valeur
+            })
+
         }
-    } catch (e) {
-        console.log("Erreur Rencontrer : " + e.stack)
-    }
 }
 getPurchase()
 
-console.log("ça marche!")
+console.log("Hey!! tu n'as pas faire planté ton system c'est cool!!")
+console.log(localStorage)

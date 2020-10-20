@@ -47,3 +47,14 @@ table {
     padding: 5px;
     border: 2px solid black;
 }
+.clientForm {
+    margin-top: 3%;
+}
+.clientForm form {
+    display: flex;
+    flex-direction: column;
+}
+.clientForm input {
+    width: 50%;
+    margin-bottom: 2%;
+}
