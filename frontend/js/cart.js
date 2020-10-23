@@ -7,19 +7,21 @@ button.addEventListener("click", function() {
     } 
 })
 //Fin Nav barre
-
+let finalyTotalPrice = document.getElementById("totalTeddysPrice")
 let tablePurchase = document.getElementById("tablePurchase")
+
 console.log(listPurchase)
 let getPurchase = function () {
     let purchaseTeddys = []
-        for (var j = 0; j <localStorage.length; j++) {
+        for (let j = 0; j <localStorage.length; j++) {
             let key = localStorage.key(j)
             purchaseTeddys.push(JSON.parse(localStorage.getItem(key)))
         }
     console.log(purchaseTeddys)// temporaire
     //localStorage.clear()
-
-        for (var i = 0; i < purchaseTeddys.length; i++){
+    
+    let tabPriceTotal = [] 
+        for (let i = 0; i < purchaseTeddys.length; i++){
             let oneTeddy = purchaseTeddys[i]
             let trPurchase = document.createElement("tr")
 
@@ -75,13 +77,14 @@ let getPurchase = function () {
             tdTotalPrice.appendChild(symboleTotalPrice)
             trPurchase.appendChild(tdTotalPrice)
             // fin prix total d'un teddy
-
             /*
             let stringTotalPrice = totalPrice.textContent
             console.log(stringTotalPrice)
             */
 
             tablePurchase.appendChild(trPurchase)
+
+            tabPriceTotal.push(calcul) 
             
             //changement de number du localStorage quand le client modifie la valeur
             inputQuantity.addEventListener("change", function () {
@@ -94,9 +97,42 @@ let getPurchase = function () {
                 }
                 localStorage.setItem(teddys.name, JSON.stringify(teddys))
                 // trouver une solution pour le calcul dynamique après le changement de la valeur
+                let calculFunction = function () {
+                    let calcul = stringPrice * inputQuantity.value
+                    tabPriceTotal.push(price.textContent) // NE MARCHE PAS car ajoute valeur a l'infini quand on click
+                    return calcul
+                }
+                console.log(tabPriceTotal)
+                totalPrice.textContent = calculFunction()
+                let finalyCalcul = function () {
+                    let result = 0
+                    for (let r = 0; r < tabPriceTotal.length; r++) {
+                        result += Number(tabPriceTotal[r])
+                    }
+                    return result
+                }
+                totalResult.textContent = finalyCalcul()
+                console.log(totalResult)
             })
-
         }
+        
+        // débul du total de tous les totals d'un seul teddy
+        
+        let result = 0 
+            for (let r = 0; r < tabPriceTotal.length; r++) {
+            result += Number(tabPriceTotal[r])
+            }
+        console.log(tabPriceTotal)
+        console.log(result)
+        let totalResult = document.createElement("strong")
+        let finalySymbole = document.createElement("strong")
+        finalySymbole.textContent = " €"
+        totalResult.textContent = result
+        finalyTotalPrice.appendChild(totalResult)
+        finalyTotalPrice.appendChild(finalySymbole)
+        
+        // fin du total de tous les totals d'un seul teddy 
+    
 }
 getPurchase()
 

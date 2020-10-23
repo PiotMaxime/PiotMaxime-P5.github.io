@@ -35,7 +35,7 @@ let getTeddy = async function () {
         let response = await fetch("http://localhost:3000/api/teddies")
         if (response.ok) {  
         let data = await response.json()
-            for (var i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 let object = data[i]
                 let listLi = document.createElement('li')
                 let a = document.createElement("a")

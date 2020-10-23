@@ -41,7 +41,7 @@ let getOneTeddy = async function () {
         let menuColor = document.createElement("h5")
         menuColor.textContent = "Choix de la Couleur"
         infoTeddy.appendChild(menuColor)
-            for (var i = 0; i < colors.length; i++) {
+            for (let i = 0; i < colors.length; i++) {
                 let color = colors[i]
                 let optionColor = document.createElement("option")
                 optionColor.textContent = color
