@@ -10,6 +10,17 @@ button.addEventListener("click", function() {
 let finalyTotalPrice = document.getElementById("totalTeddysPrice")
 let tablePurchase = document.getElementById("tablePurchase")
 
+// Methode de calcul dans un tableau
+let finalyCalcul = function (array) {
+    let result = 0
+    for (let r = 0; r < array.length; r++) {
+        result += Number(array[r])
+    }
+    return result
+}
+// Fin Methode calcul dans un tableau
+
+//Récupération du localStorage
 console.log(listPurchase)
 let getPurchase = function () {
     let purchaseTeddys = []
@@ -18,9 +29,14 @@ let getPurchase = function () {
             purchaseTeddys.push(JSON.parse(localStorage.getItem(key)))
         }
     console.log(purchaseTeddys)// temporaire
-    //localStorage.clear()
+
     
-    let tabPriceTotal = [] 
+    //localStorage.clear()
+
+
+    let tabPriceTotal = [] //tableau des prix totaux d'un seul teddy
+
+
         for (let i = 0; i < purchaseTeddys.length; i++){
             let oneTeddy = purchaseTeddys[i]
             let trPurchase = document.createElement("tr")
@@ -72,19 +88,17 @@ let getPurchase = function () {
             let stringPrice = price.textContent
             let calcul = stringPrice * inputQuantity.value
             totalPrice.textContent = calcul
+            totalPrice.setAttribute("class", "Test")
             symboleTotalPrice.textContent = " €"
             tdTotalPrice.appendChild(totalPrice)
             tdTotalPrice.appendChild(symboleTotalPrice)
             trPurchase.appendChild(tdTotalPrice)
             // fin prix total d'un teddy
-            /*
-            let stringTotalPrice = totalPrice.textContent
-            console.log(stringTotalPrice)
-            */
+           
 
             tablePurchase.appendChild(trPurchase)
 
-            tabPriceTotal.push(calcul) 
+            tabPriceTotal.push(calcul) // Ajoute du calcul des calculs du prix d'un teddy dans le tableau
             
             //changement de number du localStorage quand le client modifie la valeur
             inputQuantity.addEventListener("change", function () {
@@ -96,41 +110,29 @@ let getPurchase = function () {
                     numbers: inputQuantity.value
                 }
                 localStorage.setItem(teddys.name, JSON.stringify(teddys))
-                // trouver une solution pour le calcul dynamique après le changement de la valeur
+                // calcul dynamique après le changement de la valeur
                 let calculFunction = function () {
                     let calcul = stringPrice * inputQuantity.value
-                    tabPriceTotal.push(price.textContent) // NE MARCHE PAS car ajoute valeur a l'infini quand on click
                     return calcul
                 }
                 console.log(tabPriceTotal)
                 totalPrice.textContent = calculFunction()
-                let finalyCalcul = function () {
-                    let result = 0
-                    for (let r = 0; r < tabPriceTotal.length; r++) {
-                        result += Number(tabPriceTotal[r])
-                    }
-                    return result
+                let newPrice = document.getElementsByClassName("Test")
+                let newArray = []
+                for (let i = 0; i < newPrice.length; i++) {
+                    newArray.push(Number(newPrice[i].innerHTML))
                 }
-                totalResult.textContent = finalyCalcul()
-                console.log(totalResult)
+                totalResult.textContent = finalyCalcul(newArray)
             })
         }
         
         // débul du total de tous les totals d'un seul teddy
-        
-        let result = 0 
-            for (let r = 0; r < tabPriceTotal.length; r++) {
-            result += Number(tabPriceTotal[r])
-            }
-        console.log(tabPriceTotal)
-        console.log(result)
         let totalResult = document.createElement("strong")
         let finalySymbole = document.createElement("strong")
         finalySymbole.textContent = " €"
-        totalResult.textContent = result
+        totalResult.textContent = finalyCalcul(tabPriceTotal)
         finalyTotalPrice.appendChild(totalResult)
         finalyTotalPrice.appendChild(finalySymbole)
-        
         // fin du total de tous les totals d'un seul teddy 
     
 }
