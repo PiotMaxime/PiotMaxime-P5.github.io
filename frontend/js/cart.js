@@ -21,7 +21,7 @@ let finalyCalcul = function (array) {
 // Fin Methode calcul dans un tableau
 
 //Récupération du localStorage
-console.log(listPurchase)
+
 let getPurchase = function () {
     let purchaseTeddys = []
         for (let j = 0; j <localStorage.length; j++) {
@@ -50,6 +50,7 @@ let getPurchase = function () {
             // début id
             let tdId = document.createElement("td")
             tdId.textContent = oneTeddy._id
+            tdId.setAttribute("class", "teddyId")
             trPurchase.appendChild(tdId)
             // fin id
 
@@ -88,7 +89,7 @@ let getPurchase = function () {
             let stringPrice = price.textContent
             let calcul = stringPrice * inputQuantity.value
             totalPrice.textContent = calcul
-            totalPrice.setAttribute("class", "Test")
+            totalPrice.setAttribute("class", "oneTeddyTotal")
             symboleTotalPrice.textContent = " €"
             tdTotalPrice.appendChild(totalPrice)
             tdTotalPrice.appendChild(symboleTotalPrice)
@@ -115,14 +116,14 @@ let getPurchase = function () {
                     let calcul = stringPrice * inputQuantity.value
                     return calcul
                 }
-                console.log(tabPriceTotal)
                 totalPrice.textContent = calculFunction()
-                let newPrice = document.getElementsByClassName("Test")
-                let newArray = []
-                for (let i = 0; i < newPrice.length; i++) {
-                    newArray.push(Number(newPrice[i].innerHTML))
+                let oneTotalPrice = document.getElementsByClassName("oneTeddyTotal")
+                let totalPriceStorage = []
+                for (let i = 0; i < oneTotalPrice.length; i++) {
+                    totalPriceStorage.push(Number(oneTotalPrice[i].innerHTML))
                 }
-                totalResult.textContent = finalyCalcul(newArray)
+                totalResult.textContent = finalyCalcul(totalPriceStorage)
+                sessionStorage.setItem("totalPrice", JSON.stringify(totalResult.innerHTML))
             })
         }
         
@@ -131,6 +132,7 @@ let getPurchase = function () {
         let finalySymbole = document.createElement("strong")
         finalySymbole.textContent = " €"
         totalResult.textContent = finalyCalcul(tabPriceTotal)
+        sessionStorage.setItem("totalPrice", JSON.stringify(totalResult.innerHTML))
         finalyTotalPrice.appendChild(totalResult)
         finalyTotalPrice.appendChild(finalySymbole)
         // fin du total de tous les totals d'un seul teddy 
@@ -138,5 +140,60 @@ let getPurchase = function () {
 }
 getPurchase()
 
+
+let submit = document.getElementById("validation")
+submit.addEventListener("submit", function (e) {
+    e.preventDefault()
+    let contact = {
+        lastName: document.getElementById("lastName").value,
+        firstName: document.getElementById("firstName").value,
+        address: document.getElementById("address").value,
+        postalCode: document.getElementById("postalCode").value,
+        city: document.getElementById("city").value,
+        email: document.getElementById("email").value
+    }
+    
+    
+    let products = []
+    let teddyId = document.getElementsByClassName("teddyId")
+    for (let i = 0; i < teddyId.length; i++) {
+        products.push(teddyId[i].innerHTML)
+    } 
+    
+    let command = {
+        contact,
+        products
+    }
+    
+    console.log(command)
+
+    let postPurchase = async function (data) {
+    let response = await fetch("http://localhost:3000/api/teddies/order", {
+        method: 'POST',
+        headers: {
+        "Content-Type": "application/json"
+    },
+        body: JSON.stringify(data)
+    })
+        if (response.ok) {
+            let responseData = await response.json()
+            console.log(responseData)
+            sessionStorage.setItem("command", JSON.stringify(responseData))
+        } else {
+            alert("Serveur Indisponible!")
+        }
+    
+
+
+    }
+    postPurchase(command)
+    
+    
+    console.log("Ce message est la pour te dire que ta réussit sans que sa plante.")
+        
+})
+
 console.log("Hey!! tu n'as pas faire planté ton system c'est cool!!")
 console.log(localStorage)
+
+console.log(sessionStorage)

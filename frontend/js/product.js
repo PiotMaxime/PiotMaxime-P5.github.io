@@ -76,16 +76,7 @@ let getOneTeddy = async function () {
         //console.log(localStorage)
         // FIN TEMPORAIRE
 
-        /*validateBuy.addEventListener("click", function() {
-            localStorage.setItem("name", data.name)
-            localStorage.setItem("idBuy", data._id)
-            localStorage.setItem("price", data.price)
-            localStorage.setItem("colorSelect", selectColor.value) // j'ai teste plusieurs méthode et au final j'ai testé un truc qui je pensais que ne marcherai pas
-            localStorage.setItem("numbers", inputQuantity.value)
-            console.log(localStorage) // TEMPORAIRE
-            })
-        */
-       validateBuy.addEventListener("click", function() {
+        validateBuy.addEventListener("click", function() {
             let purchase = {
                 name: data.name,
                 _id: data._id,

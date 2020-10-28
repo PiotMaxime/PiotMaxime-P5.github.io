@@ -54,8 +54,3 @@ let getTeddy = async function () {
 }
 getTeddy()
 
-/*
-let lien = document.getElementsByClassName("lienProduit").setAttribute("href", "./Produit.html")
-
-console.log(lien)
-*/
