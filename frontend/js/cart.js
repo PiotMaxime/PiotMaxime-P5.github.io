@@ -142,7 +142,7 @@ getPurchase()
 
 
 let submit = document.getElementById("validation")
-submit.addEventListener("submit", function (e) {
+submit.addEventListener("click", function (e) {
     e.preventDefault()
     let contact = {
         lastName: document.getElementById("lastName").value,
@@ -179,15 +179,23 @@ submit.addEventListener("submit", function (e) {
             let responseData = await response.json()
             console.log(responseData)
             sessionStorage.setItem("command", JSON.stringify(responseData))
+            function RedirectionJavascript(){
+                document.location.href="../html/Confirmation.html"; 
+            }
+            RedirectionJavascript()
         } else {
-            alert("Serveur Indisponible!")
+            alert("Vous devez remplir le formulaire.")
         }
     
-
-
+    localStorage.clear()
+    /*
+    function RedirectionJavascript(){
+            document.location.href="../html/Confirmation.html"; 
+        }
+        RedirectionJavascript()
+    */
     }
     postPurchase(command)
-    
     
     console.log("Ce message est la pour te dire que ta réussit sans que sa plante.")
         

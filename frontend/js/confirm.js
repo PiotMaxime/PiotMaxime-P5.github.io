@@ -5,6 +5,7 @@ let getCommand = function () {
             multiObjects.push(JSON.parse(sessionStorage.getItem(key)))
         }
     console.log(multiObjects)
+    
 
     //récupération du prix total
     let objectPrice = multiObjects[1]
@@ -21,7 +22,9 @@ let getCommand = function () {
     
 
     let objectProducts = multiObjects[0].products
-    
+    console.log(objectProducts)
+
+
     let teddys = document.getElementById("teddys")
     for (let i = 0; i < objectProducts.length; i++) {
     let products = objectProducts[i]
@@ -29,6 +32,7 @@ let getCommand = function () {
     oneTeddy.textContent = products.name
     teddys.appendChild(oneTeddy)
     }
+    
 }
 getCommand()
 

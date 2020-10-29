@@ -54,3 +54,4 @@ let getTeddy = async function () {
 }
 getTeddy()
 
+sessionStorage.clear()
