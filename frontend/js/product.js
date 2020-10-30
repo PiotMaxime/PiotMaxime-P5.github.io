@@ -23,7 +23,7 @@ let getOneTeddy = async function () {
         let priceTeddy = document.createElement("strong")
         priceTeddy.textContent = data.price //création d'un Strong pour le prix
         let euro = document.createElement("span")
-        euro.textContent = " €" //création d'un span pour € (lol)
+        euro.textContent = " €" 
         divPrice.appendChild(priceTeddy) // ajout du prix dans la div créer
         divPrice.appendChild(euro) // ajout de € dans la div créer
         infoTeddy.appendChild(titreName) // ajout du titre dans la section "info"

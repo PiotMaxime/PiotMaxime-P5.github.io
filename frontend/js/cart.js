@@ -140,10 +140,11 @@ let getPurchase = function () {
 }
 getPurchase()
 
-
+//début de l'event pour l'envoie du formulaire
 let submit = document.getElementById("validation")
 submit.addEventListener("click", function (e) {
     e.preventDefault()
+    //création de l'objet contact
     let contact = {
         lastName: document.getElementById("lastName").value,
         firstName: document.getElementById("firstName").value,
@@ -152,21 +153,24 @@ submit.addEventListener("click", function (e) {
         city: document.getElementById("city").value,
         email: document.getElementById("email").value
     }
-    
-    
+    //fin de l'objet contact
+
+    //création du tableau products
     let products = []
     let teddyId = document.getElementsByClassName("teddyId")
     for (let i = 0; i < teddyId.length; i++) {
         products.push(teddyId[i].innerHTML)
     } 
-    
+    //fin création du tableau products
+
+    //ajout de contact et products dans un objet
     let command = {
         contact,
         products
     }
+    //fin de l'ajout
     
-    console.log(command)
-
+    //début d'appel POST
     let postPurchase = async function (data) {
     let response = await fetch("http://localhost:3000/api/teddies/order", {
         method: 'POST',
@@ -179,7 +183,7 @@ submit.addEventListener("click", function (e) {
             let responseData = await response.json()
             console.log(responseData)
             sessionStorage.setItem("command", JSON.stringify(responseData))
-            function RedirectionJavascript(){
+            function RedirectionJavascript(){  //fonction de redirection quand l'utilisateur a cliquer
                 document.location.href="../html/Confirmation.html"; 
             }
             RedirectionJavascript()
@@ -188,20 +192,8 @@ submit.addEventListener("click", function (e) {
         }
     
     localStorage.clear()
-    /*
-    function RedirectionJavascript(){
-            document.location.href="../html/Confirmation.html"; 
-        }
-        RedirectionJavascript()
-    */
+    
     }
     postPurchase(command)
-    
-    console.log("Ce message est la pour te dire que ta réussit sans que sa plante.")
-        
+    //fin d'appel POST    
 })
-
-console.log("Hey!! tu n'as pas faire planté ton system c'est cool!!")
-console.log(localStorage)
-
-console.log(sessionStorage)

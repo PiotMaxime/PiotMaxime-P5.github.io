@@ -20,10 +20,8 @@ let getCommand = function () {
     //fin de récupération de l'idOrder
     
     
-
+    //récuperation de l'objet products + ajout des noms
     let objectProducts = multiObjects[0].products
-    console.log(objectProducts)
-
 
     let teddys = document.getElementById("teddys")
     for (let i = 0; i < objectProducts.length; i++) {
@@ -32,7 +30,7 @@ let getCommand = function () {
     oneTeddy.textContent = products.name
     teddys.appendChild(oneTeddy)
     }
-    
+    //fin de récupération et des ajouts de nom
 }
 getCommand()
 
