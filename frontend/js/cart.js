@@ -28,7 +28,7 @@ let getPurchase = function () {
             let key = localStorage.key(j)
             purchaseTeddys.push(JSON.parse(localStorage.getItem(key)))
         }
-    console.log(purchaseTeddys)// temporaire
+    
 
     
     //localStorage.clear()
@@ -181,7 +181,6 @@ submit.addEventListener("click", function (e) {
     })
         if (response.ok) {
             let responseData = await response.json()
-            console.log(responseData)
             sessionStorage.setItem("command", JSON.stringify(responseData))
             function RedirectionJavascript(){  //fonction de redirection quand l'utilisateur a cliquer
                 document.location.href="../html/Confirmation.html"; 

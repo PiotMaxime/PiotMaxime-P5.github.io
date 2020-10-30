@@ -4,7 +4,6 @@ let getCommand = function () {
             let key = sessionStorage.key(j)
             multiObjects.push(JSON.parse(sessionStorage.getItem(key)))
         }
-    console.log(multiObjects)
     
 
     //récupération du prix total

@@ -85,7 +85,6 @@ let getOneTeddy = async function () {
                 numbers: inputQuantity.value
             }
             localStorage.setItem(purchase.name, JSON.stringify(purchase))
-            console.log(localStorage);
         })
         
             
