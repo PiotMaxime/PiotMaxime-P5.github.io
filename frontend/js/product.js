@@ -71,10 +71,7 @@ let getOneTeddy = async function () {
         infoTeddy.appendChild(formTeddy)
         //Fin du formulaire
         
-        // TEMPORAIRE
-        //localStorage.clear()
-        //console.log(localStorage)
-        // FIN TEMPORAIRE
+        
 
         validateBuy.addEventListener("click", function() {
             let purchase = {
