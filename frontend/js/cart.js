@@ -20,6 +20,30 @@ let finalyCalcul = function (array) {
 }
 // Fin Methode calcul dans un tableau
 
+
+//Création méthode modification de la quantité
+let onclickStorage = function (oneTeddy, inputQuantity, totalResult, totalPrice, stringPrice) {
+    let teddys = {
+        name: oneTeddy.name,
+        _id: oneTeddy._id,
+        price: oneTeddy.price,
+        color: oneTeddy.color,
+        numbers: inputQuantity.value
+    }
+    localStorage.setItem(teddys.name, JSON.stringify(teddys))
+    let calcul = stringPrice * inputQuantity.value
+    totalPrice.textContent = calcul
+    let oneTotalPrice = document.getElementsByClassName("oneTeddyTotal")
+    let totalPriceStorage = []
+    for (let i = 0; i < oneTotalPrice.length; i++) {
+        totalPriceStorage.push(Number(oneTotalPrice[i].innerHTML))
+    }
+    totalResult.textContent = finalyCalcul(totalPriceStorage)
+    sessionStorage.setItem("totalPrice", JSON.stringify(totalResult.innerHTML))
+}
+//Fin création méthode modification de la quantité 
+
+
 //Récupération du localStorage
 
 let getPurchase = function () {
@@ -28,14 +52,13 @@ let getPurchase = function () {
             let key = localStorage.key(j)
             purchaseTeddys.push(JSON.parse(localStorage.getItem(key)))
         }
-    
 
-    
+
     //localStorage.clear()
 
 
     let tabPriceTotal = [] //tableau des prix totaux d'un seul teddy
-
+    let totalResult = document.createElement("strong") //création à l'avance du résultat total
 
         for (let i = 0; i < purchaseTeddys.length; i++){
             let oneTeddy = purchaseTeddys[i]
@@ -101,34 +124,14 @@ let getPurchase = function () {
 
             tabPriceTotal.push(calcul) // Ajoute du calcul des calculs du prix d'un teddy dans le tableau
             
-            //changement de number du localStorage quand le client modifie la valeur
+            //appel de la méthode onclickStorage
             inputQuantity.addEventListener("change", function () {
-                let teddys = {
-                    name: oneTeddy.name,
-                    _id: oneTeddy._id,
-                    price: oneTeddy.price,
-                    color: oneTeddy.color,
-                    numbers: inputQuantity.value
-                }
-                localStorage.setItem(teddys.name, JSON.stringify(teddys))
-                // calcul dynamique après le changement de la valeur
-                let calculFunction = function () {
-                    let calcul = stringPrice * inputQuantity.value
-                    return calcul
-                }
-                totalPrice.textContent = calculFunction()
-                let oneTotalPrice = document.getElementsByClassName("oneTeddyTotal")
-                let totalPriceStorage = []
-                for (let i = 0; i < oneTotalPrice.length; i++) {
-                    totalPriceStorage.push(Number(oneTotalPrice[i].innerHTML))
-                }
-                totalResult.textContent = finalyCalcul(totalPriceStorage)
-                sessionStorage.setItem("totalPrice", JSON.stringify(totalResult.innerHTML))
+                onclickStorage(oneTeddy, inputQuantity, totalResult, totalPrice, stringPrice)
             })
         }
         
         // débul du total de tous les totals d'un seul teddy
-        let totalResult = document.createElement("strong")
+        
         let finalySymbole = document.createElement("strong")
         finalySymbole.textContent = " €"
         totalResult.textContent = finalyCalcul(tabPriceTotal)
