@@ -144,11 +144,6 @@ let getPurchase = function () {
 getPurchase()
 //Fin récupération du localStorage
 
-let lastName = document.getElementById("lastName")
-let firstName = document.getElementById("firstName")
-let city = document.getElementById("city")
-let postalCode = document.getElementById("postalCode")
-
 
 //début de l'event pour l'envoie du formulaire
 let submit = document.getElementById("validation") 
