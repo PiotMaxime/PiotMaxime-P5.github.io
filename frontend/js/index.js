@@ -27,8 +27,6 @@ request.open("GET", "http://localhost:3000/api/teddies")
  request.send()
 */
 
-
-
 // Methode Fetch
 let listUl = document.getElementById("teddy")
 let getTeddy = async function () {

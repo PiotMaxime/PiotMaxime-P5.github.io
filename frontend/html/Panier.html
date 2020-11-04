@@ -59,18 +59,20 @@
                     <h3>Information du clien pour la commande :</h3>
                     <form>
                         <label for="lastName">Nom :</label>
-                        <input type="text" id="lastName" placeholder="Duval" required>
+                        <input type="text" name="lastname" id="lastName" placeholder="Duval" required pattern="[A-Za-z]+"> 
                         <label for="firstName">Prénom :</label>
-                        <input type="text" id="firstName" placeholder="Louis" required>
+                        <input type="text" name="firstname" id="firstName" placeholder="Louis" required pattern="[A-Za-z]+">
                         <label for="address">Adresse :</label>
-                        <input type="text" id="address" placeholder="22 rue Fauchard" required>
+                        <input type="text" name="address" id="address" placeholder="22 rue Fauchard" required>
                         <label for="postalCode">Code Postal :</label>
-                        <input type="text" id="postalCode" placeholder="93200" required>
+                        <input type="text"name="postalcode"  id="postalCode" placeholder="93200" required>
                         <label for="city">Ville :</label>
-                        <input type="text" id="city" placeholder="Saint-Denis" required>
+                        <input type="text" name="city" id="city" placeholder="Saint-Denis" required>
                         <label for="email">E-mail :</label>
-                        <input type="email" id="email" placeholder="Louis-Duval@email.com" required>
-                        <input type="submit" value="| | | Confirmer l'achat | | |" id="validation">
+                        <input type="email" name="email" id="email" placeholder="Louis-Duval@email.com" required>
+                        <!-- <input type="button" id="validation" value="||| Confirmation de l'achat |||"> -->
+                        <button type="submit" id="validation">||| Confirmation de l'achat |||</button>
+                        <p id="error"></p>
                     </form>
                 </div>
             </section>

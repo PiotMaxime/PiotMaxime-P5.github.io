@@ -142,9 +142,28 @@ let getPurchase = function () {
     
 }
 getPurchase()
+//Fin récupération du localStorage
 
-//début de l'event pour l'envoie du formulaire
-let submit = document.getElementById("validation")
+let lastName = document.getElementById("lastName")
+let firstName = document.getElementById("firstName")
+let city = document.getElementById("city")
+let postalCode = document.getElementById("postalCode")
+
+
+lastName.addEventListener('input', () => {
+    lastName.setCustomValidity('')
+    lastName.checkValidity()
+  })
+  
+  lastName.addEventListener('invalid', () => {
+    if (lastName.value === '') {
+      lastName.setCustomValidity("Veuillez saisir votre nom !")
+    } else {
+      lastName.setCustomValidity("Un nom ne peut contenir que des lettres minuscules et majuscules, veuillez réessayer")
+    }
+  })
+
+let submit = document.getElementById("validation") //début de l'event pour l'envoie du formulaire
 submit.addEventListener("click", function (e) {
     e.preventDefault()
     //création de l'objet contact
@@ -155,24 +174,19 @@ submit.addEventListener("click", function (e) {
         postalCode: document.getElementById("postalCode").value,
         city: document.getElementById("city").value,
         email: document.getElementById("email").value
-    }
-    //fin de l'objet contact
-
+    } //fin de l'objet contact
     //création du tableau products
     let products = []
     let teddyId = document.getElementsByClassName("teddyId")
     for (let i = 0; i < teddyId.length; i++) {
         products.push(teddyId[i].innerHTML)
-    } 
-    //fin création du tableau products
-
+    } //fin création du tableau products
     //ajout de contact et products dans un objet
-    let command = {
+    let command = { 
         contact,
         products
-    }
-    //fin de l'ajout
-    
+    } //fin de l'ajout
+    let error = document.getElementById("error")
     //début d'appel POST
     let postPurchase = async function (data) {
     let response = await fetch("http://localhost:3000/api/teddies/order", {
@@ -185,17 +199,15 @@ submit.addEventListener("click", function (e) {
         if (response.ok) {
             let responseData = await response.json()
             sessionStorage.setItem("command", JSON.stringify(responseData))
+            error.innerHTML = " "
             function RedirectionJavascript(){  //fonction de redirection quand l'utilisateur a cliquer
                 document.location.href="../html/Confirmation.html"; 
             }
             RedirectionJavascript()
         } else {
-            alert("Vous devez remplir le formulaire.")
+            error.innerHTML = "Vous devez remplir le formulaire."
         }
-    
     localStorage.clear()
-    
     }
-    postPurchase(command)
-    //fin d'appel POST    
-})
+    postPurchase(command)  //fin d'appel POST    
+}) //Fin évent envoie du formulaire

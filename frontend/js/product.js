@@ -82,6 +82,7 @@ let getOneTeddy = async function () {
                 numbers: inputQuantity.value
             }
             localStorage.setItem(purchase.name, JSON.stringify(purchase))
+            alert("Votre achat à bien été ajouter à votre Panier.")
         })
         
             
