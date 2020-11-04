@@ -150,20 +150,8 @@ let city = document.getElementById("city")
 let postalCode = document.getElementById("postalCode")
 
 
-lastName.addEventListener('input', () => {
-    lastName.setCustomValidity('')
-    lastName.checkValidity()
-  })
-  
-  lastName.addEventListener('invalid', () => {
-    if (lastName.value === '') {
-      lastName.setCustomValidity("Veuillez saisir votre nom !")
-    } else {
-      lastName.setCustomValidity("Un nom ne peut contenir que des lettres minuscules et majuscules, veuillez réessayer")
-    }
-  })
-
-let submit = document.getElementById("validation") //début de l'event pour l'envoie du formulaire
+//début de l'event pour l'envoie du formulaire
+let submit = document.getElementById("validation") 
 submit.addEventListener("click", function (e) {
     e.preventDefault()
     //création de l'objet contact
