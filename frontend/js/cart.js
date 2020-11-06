@@ -45,7 +45,6 @@ let onclickStorage = function (oneTeddy, inputQuantity, totalResult, totalPrice,
 
 
 //Récupération du localStorage
-
 let getPurchase = function () {
     let purchaseTeddys = []
         for (let j = 0; j <localStorage.length; j++) {
@@ -145,10 +144,140 @@ getPurchase()
 //Fin récupération du localStorage
 
 
+// Vérification Regex LastName
+function verifLastName() {
+    let lastName = document.getElementById("lastName")
+    let error = document.getElementById("errorLastName")
+    lastName.addEventListener("blur", function(e){
+        let regexLastName = /^[A-Za-z]+$/
+        if (e.target.value !== "" && !regexLastName.test(e.target.value)){
+            error.textContent = "Nom invalide"
+            return false
+        } else {
+            error.textContent = ""
+            return true
+        }
+    })
+    if (lastName.value !== "" && error.textContent === "") return true
+    else return false
+}
+verifLastName()
+// Fin Regex LastName
+// Vérification Regex FirstName
+function verifFirstName() {
+    let firstName = document.getElementById("firstName")
+    let error = document.getElementById("errorFirstName")
+    firstName.addEventListener("blur", function(e){
+        let regexFirstName = /^[A-Za-z]+$/
+        if (e.target.value !== "" && !regexFirstName.test(e.target.value)){
+            error.textContent = "Prénom invalide"
+            return false
+        } else {
+            error.textContent = ""
+            return true
+        }
+    })
+    if (firstName.value !== "" && error.textContent === "") return true
+    else return false
+}
+verifFirstName()
+// Fin Regex FirstName
+// Vérification Regex Address
+function verifAddress() {
+    let address = document.getElementById("address")
+    let error = document.getElementById("errorAddress")
+    address.addEventListener("blur", function(e){
+        let regexAddress = /[0-9]+.+[A-Za-z]+/
+        if (e.target.value !== "" && !regexAddress.test(e.target.value)){
+            error.textContent = "Adresse invalide"
+            return false
+        } else {
+            error.textContent = ""
+            return true
+        }
+    })
+    if (address.value !== "" && error.textContent === "") return true
+    else return false
+}
+verifAddress()
+// Fin Regex Address
+// Vérification Regex City
+function verifCity() {
+    let city = document.getElementById("city")
+    let error = document.getElementById("errorCity")
+    city.addEventListener("blur", function(e) {
+        let regexCity = /^[A-Za-z]+.+[A-Za-z]+$/
+        if (e.target.value !== "" && !regexCity.test(e.target.value)){
+            error.textContent = "Ville invalide"
+            return false
+        } else {
+            error.textContent = ""
+            return true
+        }
+    })
+    if (city.value !== "" && error.textContent === "") return true
+    else return false
+} 
+verifCity()
+// Fin Regex City
+// Vérification Regex PostalCode
+function verifPostalCode() {
+    let postalCode = document.getElementById("postalCode")
+    let error = document.getElementById("errorPostalCode")
+    postalCode.addEventListener("blur", function(e) {
+        let regexPostalCode = /^[0-9]+$/
+        if (e.target.value !== "" && !regexPostalCode.test(e.target.value)){
+            error.textContent = "Code Postal invalide"
+            return false
+        } else {
+            error.textContent = ""
+            return true
+        }
+    })
+    if (postalCode.value !== "" && error.textContent === "") return true
+    else return false
+}
+verifPostalCode()
+// Fin Regex PostalCode
+// Vérification Regex Email
+function verifEmail() {
+    let email = document.getElementById("email")
+    let error = document.getElementById("errorEmail")
+    email.addEventListener("blur", function(e) {
+        let regexEmail = /^.+@.+\..+$/
+        if (e.target.value !== "" && !regexEmail.test(e.target.value)){
+            error.textContent = "Email invalide"
+            return false
+        } else {
+            error.textContent = ""
+            return true
+        }
+    })
+    if (email.value !== "" && error.textContent === "") return true
+    else return false
+}
+verifEmail()
+// Fin Regex Email
+// Verification de toutes les Regex
+function formVerif() {
+    if (verifLastName() 
+    && verifFirstName() 
+    && verifAddress() 
+    && verifCity() 
+    && verifPostalCode()
+    && verifEmail()) {
+        return true
+    } else {
+        alert("Votre formulaire n'est pas valide.")
+    }
+}
+// Fin de vérification de toutes les Regex
 //début de l'event pour l'envoie du formulaire
 let submit = document.getElementById("validation") 
 submit.addEventListener("click", function (e) {
     e.preventDefault()
+    //appel de la vérification des Regex du formulaire
+    if (formVerif()) {
     //création de l'objet contact
     let contact = {
         lastName: document.getElementById("lastName").value,
@@ -168,8 +297,9 @@ submit.addEventListener("click", function (e) {
     let command = { 
         contact,
         products
-    } //fin de l'ajout
-    let error = document.getElementById("error")
+    } 
+    //fin de l'ajout
+    let errorForm = document.getElementById("errorForm")
     //début d'appel POST
     let postPurchase = async function (data) {
     let response = await fetch("http://localhost:3000/api/teddies/order", {
@@ -182,15 +312,18 @@ submit.addEventListener("click", function (e) {
         if (response.ok) {
             let responseData = await response.json()
             sessionStorage.setItem("command", JSON.stringify(responseData))
-            error.innerHTML = " "
+            errorForm.innerHTML = " "
             function RedirectionJavascript(){  //fonction de redirection quand l'utilisateur a cliquer
-                document.location.href="../html/Confirmation.html"; 
+            document.location.href="../html/Confirmation.html"; 
             }
             RedirectionJavascript()
         } else {
-            error.innerHTML = "Vous devez remplir le formulaire."
+            errorForm.innerHTML = "Vous devez remplir le formulaire."
         }
     localStorage.clear()
     }
-    postPurchase(command)  //fin d'appel POST    
-}) //Fin évent envoie du formulaire
+    postPurchase(command)
+    //fin d'appel POST 
+    }   
+})
+//Fin évent envoie du formulaire

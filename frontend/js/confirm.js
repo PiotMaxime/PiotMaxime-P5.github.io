@@ -32,4 +32,3 @@ let getCommand = function () {
     //fin de récupération et des ajouts de nom
 }
 getCommand()
-
