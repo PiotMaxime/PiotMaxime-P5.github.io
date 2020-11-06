@@ -269,6 +269,7 @@ function formVerif() {
         return true
     } else {
         alert("Votre formulaire n'est pas valide.")
+        errorForm.innerHTML = "Vous devez remplir le formulaire."
     }
 }
 // Fin de vérification de toutes les Regex
@@ -318,7 +319,7 @@ submit.addEventListener("click", function (e) {
             }
             RedirectionJavascript()
         } else {
-            errorForm.innerHTML = "Vous devez remplir le formulaire."
+            alert("Serveur Indisponible!!")
         }
     localStorage.clear()
     }
